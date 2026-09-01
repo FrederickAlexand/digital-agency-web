@@ -10,8 +10,8 @@ export const NAV_LINKS = [
 
 export const CONTACT_INFO = {
   email: "hello@meridiandigital.com",
-  location: "Singapore · Remote-First",
-  phone: "+65 8000 0000",
+  location: "Indonesia · Remote-First",
+  phone: "+62 811 868 3717",
 };
 
 export const BUDGET_OPTIONS = [

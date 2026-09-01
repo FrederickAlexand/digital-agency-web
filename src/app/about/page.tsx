@@ -39,21 +39,21 @@ const VALUES = [
 
 const FOUNDERS = [
   {
-    name: "Alexandra Chen",
+    name: "Frederick Alexander Badaruddin",
     role: "Business Director",
-    focus: "Strategy & Client Success",
-    bio: "With 15+ years in management consulting and digital transformation, Alexandra ensures every engagement aligns with client business objectives. She leads discovery workshops, stakeholder alignment, and post-delivery success reviews.",
+    focus: "Strategy & High-Integrity Advisory",
+    bio: "Drawing from his background in private wealth consulting and strategic advisory, Frederick ensures every engagement aligns with long-term business objectives. He leads discovery workshops and champions a reputation-driven approach, prioritizing genuine client success and sustainable growth.",
     expertise: [
-      "Digital transformation strategy",
+      "Strategic advisory & consulting",
       "Stakeholder management",
-      "ROI measurement & reporting",
+      "Brand & reputation strategy",
     ],
   },
   {
-    name: "Marcus Tan",
+    name: "Davin Kurnia Hiuredhy",
     role: "Technical Director",
     focus: "Architecture & Delivery",
-    bio: "Marcus brings deep expertise in enterprise architecture and agile delivery, having led engineering teams at Fortune 500 companies. He oversees technical blueprints, code quality standards, and ensures scalable, maintainable solutions.",
+    bio: "Davin brings deep expertise in enterprise architecture and software delivery. He oversees technical blueprints, code quality standards, and ensures that all solutions are scalable, maintainable, and engineered to solve complex operational challenges.",
     expertise: [
       "Enterprise architecture",
       "Cloud & security best practices",
@@ -93,6 +93,7 @@ export default function AboutPage() {
                     {founder.name
                       .split(" ")
                       .map((n) => n[0])
+                      .slice(0, 2)
                       .join("")}
                   </div>
                   <p className="text-sm font-semibold uppercase tracking-widest text-cta-blue">
