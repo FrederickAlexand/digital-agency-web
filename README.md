@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Meridian Digital — B2B Software House Agency Website
+
+A professional, high-converting B2B software house agency website built with Next.js (App Router), Tailwind CSS, Framer Motion, and Lucide React. Designed for trust, executive-level professionalism, and advisory-led positioning.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS v4
+- **Animations:** Framer Motion (subtle fade-ins & slide-ups)
+- **Icons:** Lucide React
+- **Deployment:** Vercel-ready
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Landing page — Hero, trust banner, advisory process, services |
+| `/portfolio` | Case studies grid + detailed write-ups |
+| `/about` | Co-founders & company philosophy |
+| `/contact` | Contact form + info (API route placeholder) |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- npm
+
+### Install & Run
 
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── api/contact/route.ts   # Contact form API (Resend/Nodemailer placeholder)
+│   ├── about/page.tsx
+│   ├── contact/page.tsx
+│   ├── portfolio/page.tsx
+│   ├── layout.tsx             # Root layout with Header & Footer
+│   ├── page.tsx               # Home page
+│   └── globals.css            # Design tokens & Tailwind
+├── components/
+│   ├── contact/ContactForm.tsx
+│   ├── home/                  # Hero, Services, TrustBanner, etc.
+│   ├── layout/Header.tsx, Footer.tsx
+│   ├── portfolio/CaseStudyCard.tsx
+│   └── ui/                    # Button, FadeIn, SectionHeading
+└── lib/
+    ├── constants.ts
+    └── case-studies.ts
+public/
+└── images/                    # Case study mockup SVGs
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact Form Email Integration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The API route at `src/app/api/contact/route.ts` currently logs submissions to the console. To enable email delivery:
 
-## Deploy on Vercel
+### Option 1: Resend (recommended for Vercel)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm install resend
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Add to `.env.local`:
+
+```
+RESEND_API_KEY=re_xxxxxxxx
+CONTACT_EMAIL=hello@meridiandigital.com
+```
+
+### Option 2: Nodemailer (SMTP)
+
+```bash
+npm install nodemailer
+```
+
+Configure SMTP credentials in `.env.local`.
+
+## Deploy to Vercel
+
+1. Push the project to GitHub
+2. Import the repo at [vercel.com/new](https://vercel.com/new)
+3. Add environment variables if using email integration
+4. Deploy
+
+## Design System
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| Navy | `#0f172a` | Primary backgrounds, headings |
+| White | `#ffffff` | Content backgrounds |
+| CTA Blue | `#1e3a5f` | Primary buttons |
+| CTA Gold | `#c9a227` | Accents, secondary CTAs |
+| Slate Muted | `#64748b` | Secondary text |
+| Font | Inter | Body & headings |
+
+## License
+
+Private — All rights reserved.
