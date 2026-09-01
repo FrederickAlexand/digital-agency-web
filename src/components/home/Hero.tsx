@@ -40,7 +40,7 @@ export default function Hero() {
               <Button
                 href="/portfolio"
                 variant="outline"
-                className="border-white/20 bg-transparent text-white hover:bg-white/5 hover:border-white/30"
+                className="border-white/20 bg-transparent text-navy hover:bg-white/50 hover:border-white/30"
               >
                 View Case Studies
                 <ArrowRight size={16} className="ml-2 inline" />
