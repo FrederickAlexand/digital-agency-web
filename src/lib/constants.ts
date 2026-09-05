@@ -1,4 +1,4 @@
-export const SITE_NAME = "Meridian Digital";
+export const SITE_NAME = "Focus Digital Labs";
 export const SITE_TAGLINE = "High-Integrity Advisory & Custom Software";
 
 export const NAV_LINKS = [
@@ -9,7 +9,7 @@ export const NAV_LINKS = [
 ] as const;
 
 export const CONTACT_INFO = {
-  email: "hello@meridiandigital.com",
+  email: "hello@fdlabs.com",
   location: "Indonesia · Remote-First",
   phone: "+62 811 868 3717",
 };
