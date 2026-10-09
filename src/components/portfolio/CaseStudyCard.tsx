@@ -90,7 +90,7 @@ export default function CaseStudyCard({
   return (
     <FadeIn>
       <Link
-        href={`/portfolio#${study.slug}`}
+        href={study.slug === "inventory-management-dashboard" ? `/portfolio/${study.slug}` : `/portfolio#${study.slug}`}
         className="group block overflow-hidden rounded-lg border border-slate-border bg-white transition-shadow hover:shadow-lg"
       >
         <div className="relative aspect-[16/10] bg-navy overflow-hidden">
