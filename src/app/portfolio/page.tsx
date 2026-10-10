@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import CaseStudyCard from "@/components/portfolio/CaseStudyCard";
 import Button from "@/components/ui/Button";
@@ -32,16 +35,37 @@ export default function PortfolioPage() {
             {CASE_STUDIES.map((study) => (
               <CaseStudyCard key={study.id} study={study} />
             ))}
-          </div>
-
-          <div className="space-y-24">
-            {CASE_STUDIES.map((study, index) => (
-              <FadeIn key={study.slug} delay={index * 0.1}>
-                <div id={study.slug} className="scroll-mt-28">
-                  <CaseStudyCard study={study} detailed />
+            <FadeIn>
+              <Link
+                href="/portfolio/interior-design"
+                className="group block overflow-hidden rounded-lg border border-slate-border bg-white transition-shadow hover:shadow-lg"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-navy">
+                  <Image
+                    src="/images/interior-design/minimal-dining.jpg"
+                    alt="Interior minimalis dengan meja putih, bangku kayu, dan cahaya natural"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
                 </div>
-              </FadeIn>
-            ))}
+                <div className="p-6">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-cta-blue">
+                    Landing page · Interior design
+                  </span>
+                  <h3 className="mt-2 mb-2 text-lg font-semibold text-navy transition-colors group-hover:text-cta-blue">
+                    AUREL — Interior Atelier
+                  </h3>
+                  <p className="mb-4 text-sm text-slate-muted line-clamp-2">
+                    Studio interior dengan palet warm white dan walnut, fotografi natural, serta pendekatan desain yang personal.
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-cta-blue">
+                    Explore landing page
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Link>
+            </FadeIn>
           </div>
         </div>
       </section>
