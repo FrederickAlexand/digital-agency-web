@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
-import { CONTACT_INFO, NAV_LINKS, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
+import {
+  CONTACT_INFO,
+  NAV_LINKS,
+  SITE_NAME,
+  SITE_TAGLINE,
+  getWhatsAppUrl,
+} from "@/lib/constants";
 
 export default function Footer() {
   return (
@@ -50,6 +56,16 @@ export default function Footer() {
               <li className="flex items-center gap-2">
                 <MapPin size={16} className="shrink-0 text-cta-gold" />
                 {CONTACT_INFO.location}
+              </li>
+              <li>
+                <a
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  WhatsApp · {CONTACT_INFO.whatsapp.name}
+                </a>
               </li>
             </ul>
           </div>

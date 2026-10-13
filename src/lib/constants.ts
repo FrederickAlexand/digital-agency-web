@@ -12,7 +12,21 @@ export const CONTACT_INFO = {
   email: "hello@fdlabs.com",
   location: "Indonesia · Remote-First",
   phone: "+62 811 868 3717",
+  whatsapp: {
+    name: "Frederick Alexander",
+    displayNumber: "0811-8683-717",
+    e164: "628118683717",
+    prefilledMessage:
+      "Hello Frederick, I would like to discuss a software project with Focus Digital Labs.",
+  },
 };
+
+export function getWhatsAppUrl(message?: string) {
+  const text = encodeURIComponent(
+    message ?? CONTACT_INFO.whatsapp.prefilledMessage
+  );
+  return `https://wa.me/${CONTACT_INFO.whatsapp.e164}?text=${text}`;
+}
 
 export const BUDGET_OPTIONS = [
   { value: "", label: "Select budget range" },

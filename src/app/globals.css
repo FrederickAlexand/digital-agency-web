@@ -30,3 +30,62 @@ body {
   color: var(--navy);
   font-family: var(--font-inter), system-ui, sans-serif;
 }
+
+@keyframes wa-bounce {
+  0%,
+  18%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  8% {
+    transform: translateY(-10px) scale(1.05);
+  }
+  12% {
+    transform: translateY(0) scale(1);
+  }
+  15% {
+    transform: translateY(-5px) scale(1.02);
+  }
+}
+
+@keyframes wa-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  80%,
+  100% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
+
+.wa-fab {
+  animation: wa-bounce 3.2s ease-in-out infinite;
+}
+
+.wa-fab-ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: #25d366;
+  animation: wa-ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.wa-fab-ping-delayed {
+  animation-delay: 0.7s;
+}
+
+.wa-fab:hover,
+.wa-fab:focus-visible {
+  animation: none;
+  transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-fab,
+  .wa-fab-ping,
+  .wa-fab-ping-delayed {
+    animation: none;
+  }
+}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SiteHeader, SiteFooter } from "@/components/layout/SiteChrome";
+import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import { SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
 import "./globals.css";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <WhatsAppButton />
       </body>
     </html>
   );

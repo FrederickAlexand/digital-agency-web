@@ -3,7 +3,7 @@ import { Mail, MapPin, Clock } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ContactForm from "@/components/contact/ContactForm";
 import FadeIn from "@/components/ui/FadeIn";
-import { CONTACT_INFO } from "@/lib/constants";
+import { CONTACT_INFO, getWhatsAppUrl } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Contact",
