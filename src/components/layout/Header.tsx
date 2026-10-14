@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
 import Button from "@/components/ui/Button";
+import Image from 'next/image';
 
 export default function Header() {
   const pathname = usePathname();
@@ -31,14 +32,16 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <Link href="/" className="group flex flex-col">
-          <span className="text-lg font-bold tracking-tight text-navy">
-            {SITE_NAME}
-          </span>
-          <span className="hidden text-[10px] font-medium uppercase tracking-widest text-slate-muted sm:block">
-            Advisory & Development
-          </span>
-        </Link>
+      <Link href="/" className="group flex flex-col">
+        <Image 
+          src="/images/logo/fd_logo_primary_horizontal.png" 
+          alt="Site Logo" 
+          width={240} 
+          height={60} 
+          className="h-15 w-auto object-contain"
+          priority 
+        />
+      </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map(({ href, label }) => {

@@ -9,7 +9,7 @@ export const NAV_LINKS = [
 ] as const;
 
 export const CONTACT_INFO = {
-  email: "hello@fdlabs.com",
+  email: "frederickchang75@gmail.com",
   location: "Indonesia · Remote-First",
   phone: "+62 811 868 3717",
   whatsapp: {
@@ -29,9 +29,15 @@ export function getWhatsAppUrl(message?: string) {
 }
 
 export const BUDGET_OPTIONS = [
-  { value: "", label: "Select budget range" },
-  { value: "under-25k", label: "Under $25,000" },
-  { value: "25k-50k", label: "$25,000 – $50,000" },
-  { value: "50k-100k", label: "$50,000 – $100,000" },
-  { value: "100k-plus", label: "$100,000+" },
+  { value: "", label: "Pilih rentang anggaran" },
+  { value: "under-2jt", label: "Di bawah Rp 2 juta" },
+  { value: "2jt-7jt", label: "Rp 2 juta – Rp 7 juta" },
+  { value: "7jt-20jt", label: "Rp 7 juta – Rp 20 juta" },
+  { value: "20jt-50jt", label: "Rp 20 juta – Rp 50 juta" },
+  { value: "above-50jt", label: "Di atas Rp 50 juta" },
 ];
+
+export function getBudgetLabel(value?: string) {
+  if (!value) return "Tidak disebutkan";
+  return BUDGET_OPTIONS.find((option) => option.value === value)?.label ?? value;
+}

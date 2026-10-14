@@ -2,6 +2,7 @@ import Hero from "@/components/home/Hero";
 import ValueProposition from "@/components/home/ValueProposition";
 import ServicesOverview from "@/components/home/ServicesOverview";
 import TrustBanner from "@/components/home/TrustBanner";
+import FeaturedCaseStudy from "@/components/home/FeaturedCaseStudy";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
@@ -13,6 +14,7 @@ export default function HomePage() {
       <TrustBanner />
       <ValueProposition />
       <ServicesOverview />
+      <FeaturedCaseStudy />
 
       <section className="bg-navy py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">

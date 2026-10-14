@@ -2,7 +2,9 @@
 
 import { useState, type FormEvent } from "react";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
-import { BUDGET_OPTIONS } from "@/lib/constants";
+import { BUDGET_OPTIONS, SITE_NAME, getBudgetLabel } from "@/lib/constants";
+
+const WEB3FORMS_ACCESS_KEY = "813ee6ac-5020-482d-a8b4-ed0b2953203b";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -36,22 +38,36 @@ export default function ContactForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
     setErrorMessage("");
 
     try {
-      const response = await fetch("/api/contact", {
+      const payload = new FormData(e.currentTarget);
+      payload.append("access_key", WEB3FORMS_ACCESS_KEY);
+      payload.append("from_name", SITE_NAME);
+      payload.append("replyto", formData.email);
+      payload.append(
+        "subject",
+        `[${SITE_NAME}] Inquiry baru dari ${formData.name} (${formData.company})`
+      );
+      payload.set("budget", getBudgetLabel(formData.budget));
+
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: payload,
       });
 
-      const data = await response.json();
+      const data = (await response.json()) as {
+        success?: boolean;
+        message?: string;
+      };
 
-      if (!response.ok) {
-        throw new Error(data.error || "Something went wrong. Please try again.");
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message || "Something went wrong. Please try again."
+        );
       }
 
       setStatus("success");
@@ -71,6 +87,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-2 block text-sm font-medium text-navy">
@@ -131,17 +148,22 @@ export default function ContactForm() {
             htmlFor="budget"
             className="mb-2 block text-sm font-medium text-navy"
           >
-            Project Budget
+            Project Budget <span className="text-red-500">*</span>
           </label>
           <select
             id="budget"
             name="budget"
+            required
             value={formData.budget}
             onChange={handleChange}
             className={inputClasses}
           >
             {BUDGET_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
+              <option
+                key={option.value || "placeholder"}
+                value={option.value}
+                disabled={!option.value}
+              >
                 {option.label}
               </option>
             ))}

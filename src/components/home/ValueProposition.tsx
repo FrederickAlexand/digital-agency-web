@@ -36,7 +36,11 @@ export default function ValueProposition() {
           description="Every engagement follows a disciplined three-phase methodology designed to eliminate waste and maximize ROI."
         />
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="relative grid gap-8 md:grid-cols-3">
+          <div
+            className="pointer-events-none absolute top-16 right-[16%] left-[16%] hidden h-px bg-slate-border md:block"
+            aria-hidden="true"
+          />
           {STEPS.map((item, index) => (
             <FadeIn key={item.step} delay={index * 0.1}>
               <div className="group relative h-full rounded-lg border border-slate-border bg-white p-8 transition-shadow hover:shadow-lg">

@@ -1,31 +1,9 @@
 import { NextResponse } from "next/server";
+import { CONTACT_INFO, getBudgetLabel, SITE_NAME } from "@/lib/constants";
 
-/**
- * Contact form API route — placeholder for email integration.
- *
- * To enable email delivery, integrate with one of:
- *
- * 1. Resend (recommended for Vercel):
- *    npm install resend
- *    Set RESEND_API_KEY in .env.local
- *
- *    import { Resend } from 'resend';
- *    const resend = new Resend(process.env.RESEND_API_KEY);
- *    await resend.emails.send({
- *      from: 'onboarding@resend.dev',
- *      to: 'hello@meridiandigital.com',
- *      subject: `New inquiry from ${name} (${company})`,
- *      html: `<p>...</p>`,
- *    });
- *
- * 2. Nodemailer (SMTP):
- *    npm install nodemailer
- *    Configure SMTP credentials in .env.local
- *
- *    import nodemailer from 'nodemailer';
- *    const transporter = nodemailer.createTransport({ ... });
- *    await transporter.sendMail({ ... });
- */
+const WEB3FORMS_KEY =
+  process.env.WEB3FORMS_ACCESS_KEY?.trim() ||
+  "813ee6ac-5020-482d-a8b4-ed0b2953203b";
 
 interface ContactPayload {
   name: string;
@@ -62,19 +40,44 @@ export async function POST(request: Request) {
     }
 
     const { name, company, email, budget, message } = body;
+    const budgetLabel = getBudgetLabel(budget);
 
-    // Placeholder: log submission (replace with Resend/Nodemailer in production)
-    console.log("[Contact Form Submission]", {
-      name,
-      company,
-      email,
-      budget: budget || "Not specified",
-      message,
-      timestamp: new Date().toISOString(),
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        name: name.trim(),
+        email: email.trim(),
+        company: company.trim(),
+        budget: budgetLabel,
+        message: message.trim(),
+        from_name: SITE_NAME,
+        replyto: email.trim(),
+        subject: `[${SITE_NAME}] Inquiry baru dari ${name.trim()} (${company.trim()})`,
+        to: CONTACT_INFO.email,
+      }),
     });
 
-    // Simulate email send delay
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    const result = (await response.json().catch(() => null)) as {
+      success?: boolean;
+      message?: string;
+    } | null;
+
+    if (!response.ok || !result?.success) {
+      console.error("[Contact Form] Web3Forms error", result);
+      return NextResponse.json(
+        {
+          error:
+            result?.message ||
+            "Pengiriman email gagal. Coba lagi dalam beberapa saat.",
+        },
+        { status: 502 }
+      );
+    }
 
     return NextResponse.json(
       {
@@ -83,7 +86,8 @@ export async function POST(request: Request) {
       },
       { status: 200 }
     );
-  } catch {
+  } catch (error) {
+    console.error("[Contact Form] Unexpected error", error);
     return NextResponse.json(
       { error: "Failed to process your request. Please try again." },
       { status: 500 }
