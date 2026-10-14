@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ArrowLeft } from "lucide-react";
 import styles from "./interior.module.css";
 
 export const metadata: Metadata = {
@@ -52,6 +52,7 @@ export default function InteriorDesignPage() {
       <header className={styles.header}>
         <a href="#home" className={styles.brand} aria-label="Aurel Interior Atelier, home">AUREL<span>INTERIOR ATELIER</span></a>
         <nav aria-label="Studio navigation" className={styles.navigation}>
+          <Link href="/portfolio" className={styles.backLink}><ArrowLeft size={16} aria-hidden="true" /> Back to portfolio</Link>
           <a href="#work">Our work</a>
           <a href="#studio">The studio</a>
           <a href="#approach">Our approach</a>
@@ -95,7 +96,7 @@ export default function InteriorDesignPage() {
       <section id="contact" aria-labelledby="contact-heading" className={styles.contactBand}>
         <div className={`${styles.section} ${styles.contact}`}><div><p className={styles.eyebrow}>A place to start</p><h2 id="contact-heading">Tell us about<br /><em>your space.</em></h2></div><div className={styles.contactCopy}><p>A new home, a room that needs rethinking, or an idea you have been carrying for a while. We would like to hear it.</p><p className={styles.contactHint}>Share the location, a little about the space, and what you have in mind. We can take it from there.</p><Link href="/contact" className={styles.button}>Discuss a project <ArrowUpRight size={17} aria-hidden="true" /></Link></div></div>
       </section>
-      <footer className={styles.footer}><a href="#home" className={styles.footerBrand}>AUREL <span>Interior Atelier</span></a><p>Portfolio concept. Project details are illustrative; imagery is for visual reference.</p><Link href="/portfolio" className={styles.textLink}>Back to portfolio <ArrowUpRight size={15} aria-hidden="true" /></Link></footer>
+      <footer className={styles.footer}><a href="#home" className={styles.footerBrand}>AUREL <span>Interior Atelier</span></a><p>Portfolio concept. Project details are illustrative; imagery is for visual reference.</p></footer>
     </div>
   );
 }
